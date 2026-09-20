@@ -189,4 +189,25 @@ process_refs(entry_ref dir_ref, BMessage *msg, void *reserved)
 	}
 }
 
-}
+}	// extern "C"
+
+
+// Tracker calls load_add_on() on every add-on in its Add-ons folder each
+// time it builds the Add-ons context menu (to look for an optional
+// "populate_menu" hook), well before the user ever picks this add-on from
+// the menu. That runs this translation unit's static initializers, so this
+// creates the Open With settings folder as soon as Tracker notices the
+// add-on exists, instead of waiting for the user to invoke it once first.
+namespace {
+
+struct OpenWithFolderInitializer {
+	OpenWithFolderInitializer()
+	{
+		BPath path;
+		get_open_with_folder(path);
+	}
+};
+
+const OpenWithFolderInitializer kOpenWithFolderInitializer;
+
+}	// namespace

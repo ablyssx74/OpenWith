@@ -43,9 +43,9 @@ package:
 	mkdir -p $(PACKAGE_DIR)
 	sed -e 's/$$(NAME)/$(NAME)/g' -e 's/$$(is32bit)/$(is32bit)/g' -e 's/$$(VERSION)/$(VERSION)/g' -e 's/$$(ARCH)/$(ARCH)/' -e 's/$$(YEAR)/$(shell date +%Y)/' PackageInfo.tpl > $(PACKAGE_DIR)/.PackageInfo
 	mkdir -p $(PACKAGE_DIR)/add-ons/Tracker
-	rc -o icon.rsrc icon.rdef 
-	xres -o $(NAME) icon.rsrc  
-	mimeset -f $(NAME)	
+	rc -o icon.rsrc icon.rdef testing.rdef
+	xres -o $(NAME) icon.rsrc
+	mimeset -f $(NAME)
 	cp $(NAME) $(PACKAGE_DIR)/add-ons/Tracker/Open\ With
 	package create -C $(PACKAGE_DIR) $(NAME)-$(VERSION)-1-$(ARCH).hpkg
 	
