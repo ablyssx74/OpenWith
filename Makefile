@@ -1,7 +1,7 @@
 # Makefile for Haiku Tracker Add-on
 
 NAME = testing
-VERSION = 1.0.1
+VERSION = 1.1.0
 PACKAGE_DIR := build/package
 
 
@@ -46,7 +46,7 @@ package:
 	rc -o icon.rsrc icon.rdef 
 	xres -o $(NAME) icon.rsrc  
 	mimeset -f $(NAME)	
-	cp $(NAME) $(PACKAGE_DIR)/add-ons/Tracker/Open\ konsole
+	cp $(NAME) $(PACKAGE_DIR)/add-ons/Tracker/Open\ With
 	package create -C $(PACKAGE_DIR) $(NAME)-$(VERSION)-1-$(ARCH).hpkg
 	
 clean:

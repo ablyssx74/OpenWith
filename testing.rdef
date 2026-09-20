@@ -1,13 +1,13 @@
-resource app_signature "application/x-vnd.ablyss-OpenKonsole";
+resource app_signature "application/x-vnd.ablyss-OpenWith";
 
 resource app_version {
 	major  = 1,
-	middle = 0,
+	middle = 1,
 	minor  = 0,
 	variety = B_APPV_FINAL,
 	internal = 0,
-	short_info = "Konsole Tracker Add-on",
-	long_info = "Opens /bin/konsole in the current directory."
+	short_info = "Open With Tracker Add-on",
+	long_info = "Opens the selected file with an app symlinked into the \"Open With\" settings folder."
 };
 
 resource vector_icon {

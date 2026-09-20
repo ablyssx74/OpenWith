@@ -1,4 +1,4 @@
-/* OpenKonsole
+/* Open With - Haiku Tracker Add-on
  *
  * Copyright (c) 2026 ablyss
  * See the The MIT License included in this folder *

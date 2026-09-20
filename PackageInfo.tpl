@@ -1,8 +1,8 @@
 name			$(NAME)
 version			$(VERSION)-1
 architecture	$(ARCH)
-summary 		"Konsole Tracker Add-on"
-description 	"Opens /bin/konsole in the current directory."
+summary 		"Open With Tracker Add-on"
+description 	"Opens the selected file with an app symlinked into the \"Open With\" settings folder."
 packager		"ablyss <jb@epluribusunix.net>"
 vendor			"ablyss AI assisted project"
 licenses {
@@ -16,12 +16,11 @@ provides {
 }
 requires {
 	haiku
-	konsole_kf6$(is32bit)
-}	
+}
 urls {
-	"https://github.com/ablyssx74/Haiku-OS-Konsole-Tracker-Add-on"
+	"https://github.com/ablyssx74/testing"
 }
 source-urls {
 # Download
-	"https://github.com/ablyssx74/Haiku-OS-Konsole-Tracker-Add-on/archive/refs/tags/v.1.0.0.tar.gz"
+	"https://github.com/ablyssx74/testing/archive/refs/tags/v.1.0.0.tar.gz"
 }
