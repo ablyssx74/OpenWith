@@ -37,7 +37,7 @@ build:
 	xres -o $(NAME) icon.rsrc  
 	mimeset -f $(NAME)
 
-package:
+package: build
 	@[ -n "$(PACKAGE_DIR)" ] || { echo "PACKAGE_DIR is undefined"; exit 1; }
 	rm -rf "./$(PACKAGE_DIR)"
 	mkdir -p $(PACKAGE_DIR)
@@ -50,7 +50,7 @@ package:
 	package create -C $(PACKAGE_DIR) $(NAME)-$(VERSION)-1-$(ARCH).hpkg
 	
 clean:
-	rm -f $(NAME) $(NAME)-$(VERSION)-1-$(ARCH).hpkg
+	rm -f $(NAME) *.hpkg
 	rm -fr objects*
 	rm -fr build
 	

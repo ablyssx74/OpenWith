@@ -20,6 +20,7 @@
 #include <Path.h>
 #include <PopUpMenu.h>
 #include <Roster.h>
+#include <Screen.h>
 #include <String.h>
 
 #include <cstring>
@@ -103,6 +104,8 @@ process_refs(entry_ref dir_ref, BMessage *msg, void *reserved)
 	}
 
 	BPopUpMenu *menu = new BPopUpMenu("Open With", false, false);
+	menu->SetFont(be_bold_font);
+	menu->SetFontSize(18.0f);
 
 	std::vector<entry_ref> appRefs;
 	BEntry entry;
@@ -146,8 +149,15 @@ process_refs(entry_ref dir_ref, BMessage *msg, void *reserved)
 		return;
 	}
 
-	// 4. Show the menu and see which app (if any) got picked.
-	BPoint where(100, 100);
+	// 4. Show the menu centered on screen, large enough to actually read.
+	menu->ResizeToPreferred();
+
+	BRect screenFrame(BScreen().Frame());
+	BRect menuFrame(menu->Frame());
+	BPoint where(
+		screenFrame.left + (screenFrame.Width() - menuFrame.Width()) / 2,
+		screenFrame.top + (screenFrame.Height() - menuFrame.Height()) / 2);
+
 	BMenuItem *picked = menu->Go(where, true, true, false);
 
 	int32 index = picked != NULL ? menu->IndexOf(picked) : -1;
