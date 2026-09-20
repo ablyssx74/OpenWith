@@ -5,7 +5,7 @@
 On first use the add-on creates (if needed) and reads:
 
 ```
-/boot/home/config/settings/testing/open with/
+/boot/home/config/settings/OpenWith
 ```
 
 Symlink any app into that folder (native Haiku app or a ported GTK app) and
