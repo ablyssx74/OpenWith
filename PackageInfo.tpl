@@ -18,9 +18,9 @@ requires {
 	haiku
 }
 urls {
-	"https://github.com/ablyssx74/testing"
+	"https://github.com/ablyssx74/OpenWith"
 }
 source-urls {
 # Download
-	"https://github.com/ablyssx74/testing/archive/refs/tags/v.1.0.0.tar.gz"
+	"https://github.com/ablyssx74/OpenWith/archive/refs/tags/v.1.0.0.tar.gz"
 }

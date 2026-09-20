@@ -1,6 +1,6 @@
 # Makefile for Haiku Tracker Add-on
 
-NAME = testing
+NAME = OpenWith
 VERSION = 1.1.0
 PACKAGE_DIR := build/package
 
@@ -29,29 +29,27 @@ endif
 
 DEFINES := $(DEFINES)
 
-all: build package
+all: build release
 
 build: 
 	@echo "--------- Building $(NAME) $(ARCH) ---------"
 	$(CXX) -o $(NAME) $(CXXFLAGS) $(DEFINES) $(LDFLAGS) $(LIBS) $(LD_OPTIMIZE) $(NAME).cpp
-	xres -o $(NAME) icon.rsrc  
+	rc -o $(NAME).rsrc $(NAME).rdef
+	xres -o $(NAME) $(NAME).rsrc
 	mimeset -f $(NAME)
 
-package: build
+release: build
 	@[ -n "$(PACKAGE_DIR)" ] || { echo "PACKAGE_DIR is undefined"; exit 1; }
 	rm -rf "./$(PACKAGE_DIR)"
 	mkdir -p $(PACKAGE_DIR)
 	sed -e 's/$$(NAME)/$(NAME)/g' -e 's/$$(is32bit)/$(is32bit)/g' -e 's/$$(VERSION)/$(VERSION)/g' -e 's/$$(ARCH)/$(ARCH)/' -e 's/$$(YEAR)/$(shell date +%Y)/' PackageInfo.tpl > $(PACKAGE_DIR)/.PackageInfo
 	mkdir -p $(PACKAGE_DIR)/add-ons/Tracker
-	rc -o icon.rsrc icon.rdef testing.rdef
-	xres -o $(NAME) icon.rsrc
-	mimeset -f $(NAME)
 	cp $(NAME) $(PACKAGE_DIR)/add-ons/Tracker/Open\ With
 	package create -C $(PACKAGE_DIR) $(NAME)-$(VERSION)-1-$(ARCH).hpkg
 	
 clean:
-	rm -f $(NAME) *.hpkg
+	rm -f $(NAME) *.hpkg *.rsrc
 	rm -fr objects*
 	rm -fr build
 	
-.PHONY: all build package clean
+.PHONY: all build release clean

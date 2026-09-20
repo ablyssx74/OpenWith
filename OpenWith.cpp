@@ -5,11 +5,11 @@
  * Some AI was used to help make this possibe.
  *
  * Lists the apps the user has symlinked into their personal
- * "Open With" folder (~/config/settings/testing/open with/) as a
+ * "Open With" folder (~/config/settings/OpenWith/open with/) as a
  * pop-up menu, then launches whichever one they pick with the
  * selected file(s) as arguments.
  */
-#include "testing.h"
+#include "OpenWith.h"
 #include <Alert.h>
 #include <AppDefs.h>
 #include <Directory.h>
@@ -28,10 +28,10 @@
 
 extern "C" {
 
-static const char *kOpenWithSubDir = "testing/open with";
+static const char *kOpenWithSubDir = "OpenWith/open with";
 
 
-// Resolves ~/config/settings/testing/open with/, creating it (and any
+// Resolves ~/config/settings/OpenWith/open with/, creating it (and any
 // missing parents) if it doesn't already exist.
 static status_t
 get_open_with_folder(BPath &outPath)
