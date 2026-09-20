@@ -28,7 +28,7 @@
 
 extern "C" {
 
-static const char *kOpenWithSubDir = "OpenWith/open with";
+static const char *kOpenWithSubDir = "OpenWith/";
 
 
 // Resolves ~/config/settings/OpenWith/open with/, creating it (and any
