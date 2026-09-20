@@ -171,10 +171,11 @@ process_refs(entry_ref dir_ref, BMessage *msg, void *reserved)
 	// 5. Launch the chosen app with the selected file(s) as command line
 	// arguments, the same way a terminal invocation would, so it works
 	// for GTK ports and other non-native apps as well as BeOS-native ones.
-	BPath appPath(&appRef);
-	if (appPath.InitCheck() != B_OK)
-		return;
-
+	//
+	// BRoster::Launch() always puts appRef's own path in as argv[0] itself
+	// (see BRoster::ArgVector::Init in Haiku's Roster.cpp) -- args here
+	// must contain only the actual arguments, or the app's path ends up
+	// duplicated as argv[1] and gets opened as if it were a file.
 	std::vector<BPath> filePaths;
 	for (size_t i = 0; i < selectedRefs.size(); i++) {
 		BPath filePath(&selectedRefs[i]);
@@ -183,12 +184,11 @@ process_refs(entry_ref dir_ref, BMessage *msg, void *reserved)
 	}
 
 	std::vector<const char *> args;
-	args.push_back(appPath.Path());
 	for (size_t i = 0; i < filePaths.size(); i++)
 		args.push_back(filePaths[i].Path());
 	args.push_back(NULL);
 
-	status_t status = be_roster->Launch(&appRef, (int32)args.size() - 1,
+	status_t status = be_roster->Launch(&appRef, (int32)filePaths.size(),
 		&args[0]);
 
 	if (status != B_OK && status != B_ALREADY_RUNNING) {
